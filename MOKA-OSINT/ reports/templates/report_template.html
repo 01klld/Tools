@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        table, th, td { border: 1px solid #ccc; }
+        th, td { padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h1>OSINT Report for {{ data['target'] }}</h1>
+    
+    <h2>Social Media Information</h2>
+    <table>
+        <tr><th>Profile</th></tr>
+        <tr><td>{{ data['social_media']['profile'] }}</td></tr>
+    </table>
+    
+    <h2>Domain Information</h2>
+    <table>
+        <tr><th>Domain</th><th>Registrar</th><th>Creation Date</th><th>Expiration Date</th></tr>
+        <tr>
+            <td>{{ data['domain_info']['domain'] }}</td>
+            <td>{{ data['domain_info']['registrar'] }}</td>
+            <td>{{ data['domain_info']['creation_date'] }}</td>
+            <td>{{ data['domain_info']['expiration_date'] }}</td>
+        </tr>
+    </table>
+    
+    <h2>Email Lookup</h2>
+    <table>
+        <tr><th>Email</th><th>Status</th></tr>
+        <tr>
+            <td>{{ data['email_lookup']['email'] }}</td>
+            <td>{{ data['email_lookup']['status'] }}</td>
+        </tr>
+    </table>
+    
+    <h2>Phone Lookup</h2>
+    <table>
+        <tr><th>Phone Number</th><th>Status</th></tr>
+        <tr>
+            <td>{{ data['phone_lookup']['phone_number'] }}</td>
+            <td>{{ data['phone_lookup']['status'] }}</td>
+        </tr>
+    </table>
+    
+    <h2>Data Breaches</h2>
+    <table>
+        <tr><th>Breach Name</th><th>Date</th><th>Description</th></tr>
+        {% for breach in data['data_breach'] %}
+        <tr>
+            <td>{{ breach['Name'] }}</td>
+            <td>{{ breach['BreachDate'] }}</td>
+            <td>{{ breach['Description'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
